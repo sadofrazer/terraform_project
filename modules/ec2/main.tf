@@ -28,12 +28,12 @@ resource "aws_instance" "frazer-ec2" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt update -y",
-      "sudo apt install -y nginx",
+      "sudo apt-get update -y",
+      "sudo apt-get install -y nginx",
       "sudo systemctl start nginx",
       "sudo systemctl enable nginx",
-      "sudo apt install -y git",
-      "sudo apt install -y ansible",
+      "sudo apt-get install -y git",
+      "sudo apt-get install -y ansible",
       "git clone https://github.com/sadofrazer/ansible_odoo.git",
       "cd ansible_odoo/",
       "git checkout -b aws_terraform",
