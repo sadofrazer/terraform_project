@@ -31,6 +31,15 @@ resource "aws_security_group" "my_sg" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
+  ingress {
+    description      = "8080-8082 from all"
+    from_port        = 8080
+    to_port          = 8081
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
   egress {
     from_port        = 0
     to_port          = 0

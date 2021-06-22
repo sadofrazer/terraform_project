@@ -12,7 +12,7 @@ resource "aws_instance" "frazer-ec2" {
   ami             = data.aws_ami.my_ubuntu_ami.id
   instance_type   = var.instance_type
   key_name        = var.ssh_key
-  availability_zone = "us-east-1b"
+  availability_zone = "${var.az}b"
   security_groups = ["${var.sg_name}"]
   tags = {
     Name = "${var.author}-ec2"
@@ -31,11 +31,20 @@ resource "aws_instance" "frazer-ec2" {
       "sudo apt update -y",
       "sudo apt install -y nginx",
       "sudo systemctl start nginx",
-      "sudo systemctl enable nginx"
+      "sudo systemctl enable nginx",
+      "sudo apt install -y git",
+      "sudo apt install -y ansible",
+      "git clone https://github.com/sadofrazer/ansible_odoo.git",
+      "cd ansible_odoo/",
+      "git checkout -b aws_terraform",
+      "git pull origin aws_terraform",
+      "git fetch origin aws_terraform",
+      "ansible-galaxy install -r requirements.yml",
+      "ansible-playbook -i local_host.yml odoo.yml -e ansible_user=${var.user} -e ansible_sudo_pass=${var.sudo_pass}"
     ] 
     connection {
       type        = "ssh"
-      user        = "ubuntu"
+      user        = "${var.user}"
       private_key = file("C:/Files/Docs Perso/DevOps/AWS/.aws/${var.ssh_key}.pem")
       host        = "${self.public_ip}"
     }

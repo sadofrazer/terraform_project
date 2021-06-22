@@ -38,6 +38,8 @@ module "ec2" {
   instance_type = "t2.micro"
   sg_name= "${module.sg.out_sg_name}"
   public_ip = "${module.eip.out_eip_ip}"
+  user = "ubuntu"
+  sudo_pass = "ubuntu"
 }
 
 #//////////////////////////////////////////////////
