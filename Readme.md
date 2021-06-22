@@ -22,67 +22,78 @@ we have to use 04 modules (ec2, eip, sg and ebs) to create our ec2 instance, pub
 
 ##### Variables
 
-    #Used for tag all aws resources in this project
+Used for tag all aws resources in this project
+
     variable "author" {
       type    = string
       default = "frazer"
     }
 
-    #Used to customizise the instance type of our ec2
+Used to customizise the instance type of our ec2
+
     variable "instance_type" {
       type    = string
       default = "t2.nano"
     }
 
-    #Used to specify which key pair will be use by our ec2 to enable the ssh connection
+Used to specify which key pair will be use by our ec2 to enable the ssh connection
+
     variable "ssh_key" {
       type    = string
       default = "devops-frazer"
     }
 
-    #use to specify the availability zone we'll use
+use to specify the availability zone we'll use
+
     variable "az" {
       type    = string
       default = "us-east-1b"
     }
 
-    #Used to retrieve the sg_name of our sg module's output which contains the name of the security group; this variabe permit use to make the link between our ec2 an his sg.  
+Used to retrieve the sg_name of our sg module's output which contains the name of the security group; this variabe permit use to make the link between our ec2 an his sg. 
+
     variable "sg_name" {
       type    = string
       default = "NULL"
     }
 
-    #Used to retrieve the public_ip of our eip module's output which contains the PUBLIC IP we'll use to create the ec2_file_infos in ec2 module
+Used to retrieve the public_ip of our eip module's output which contains the PUBLIC IP we'll use to create the ec2_file_infos in ec2 module
+
     variable "public_ip" {
       type    = string
       default = "NULL"
     }
 
-    #User name we'll use to etablish the remote connexion with our ec2 instance; we also use this variable as ansible_user for run the ansible_odoo role
+User name we'll use to etablish the remote connexion with our ec2 instance; we also use this variable as ansible_user for run the ansible_odoo role
+
     variable "user" {
       type    = string
       default = "NULL"
     }
 
-    #Used to do the privileges escalation when running our ansible_odoo roles
+Used to do the privileges escalation when running our ansible_odoo roles
+
     variable "sudo_pass" {
       type    = string
       default = "NULL"
     }
 
-    #Used to specify the owner of or amazon image 
+Used to specify the owner of or amazon image 
+
     variable "ubuntu_account_number" {
       default = "099720109477"
     }
    
 ##### Output file
   
-    #Variable to expose the id of our instance to other module
+Output to expose the id of our instance to other module
+
     output "out_instance_id" {
       value = aws_instance.frazer-ec2.id
     }
 
-    #Variable to expose the az of our instance to other module
+Output to expose the az of our instance to other module
+
     output "out_instance_az" {
       value = aws_instance.frazer-ec2.availability_zone
     }
@@ -95,11 +106,12 @@ we have to use 04 modules (ec2, eip, sg and ebs) to create our ec2 instance, pub
 this module just have the <author> variable to tag all its resources
 
 ##### Output file
-
-    #Expose the security group name to other modules
-    output "out_sg_name" {
-      value = aws_security_group.my_sg.name
-    }
+ 
+Expose the security group name to other modules
+    
+     output "out_sg_name" {
+       value = aws_security_group.my_sg.name
+     }
 
 #### eip module variable
 
@@ -109,12 +121,14 @@ Any variable for this module
 
 ##### Output file
   
-    #Expose his public IP to other modules
+Expose his public IP to other modules
+    
     output "out_eip_ip" {
       value = aws_eip.my_eip.public_ip
     }
 
-    #Expose eip-id to tne other module (use to make association with ec2)
+Expose eip-id to tne other module (use to make association with ec2)
+    
     output "out_eip_id" {
       value = aws_eip.my_eip.id
     }
@@ -122,20 +136,23 @@ Any variable for this module
 #### ebs module variable
 
 ##### Variable
-
-    #Used for tag all our aws resources or objects
+    
+Used for tag all our aws resources or objects
+  
     variable "author" {
       type    = string
       default = "frazer"
     }
 
-    #Use to customize the size of ow new EBS
+Use to customize the size of ow new EBS
+    
     variable "dd_size" {
       type    = number
       default = 2
     }
 
-    #use to specify the availability zone we'll use
+use to specify the availability zone we'll use
+    
     variable "az" {
       type    = string
       default = "us-east-1b"
@@ -143,7 +160,8 @@ Any variable for this module
 
 ##### Output file
 
-    #Expose the Ebs_id to other modules (use to attach this vol to our ec2)
+Expose the Ebs_id to other modules (use to attach this vol to our ec2)
+    
     output "out_vol_id" {
       value = aws_ebs_volume.my_vol.id
     }
