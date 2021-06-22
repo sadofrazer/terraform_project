@@ -176,7 +176,7 @@ Any variable for this module
     module "eip" {
       source        = "../modules/eip"
     }
-
+    
     #Appel du module de création de ec2
     module "ec2" {
       source        = "../modules/ec2"
@@ -186,8 +186,8 @@ Any variable for this module
       public_ip = "${module.eip.out_eip_ip}"
       user = "user_name"
       sudo_pass = "password"
-  }
-
+    }
+    
     #//////////////////////////////////////////////////
     #Creation des associations nécessaires entre nos ressources
 
@@ -195,7 +195,6 @@ Any variable for this module
       instance_id = module.ec2.out_instance_id
       allocation_id = module.eip.out_eip_id
     }
-
     resource "aws_volume_attachment" "ebs_att" {
       device_name = "/dev/sdh"
       volume_id   = module.ebs.out_vol_id
