@@ -1,4 +1,4 @@
-# Terraform + Ansible Role: Create AWS ressources and installing Odoo instances
+# Terraform + Nginx Server: Create AWS ressources and installing nginx server
 
 [![CI](icones/nginx_icon-100.png)](https://github.com/sadofrazer/terraform_project.git)
 
