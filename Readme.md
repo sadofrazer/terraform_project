@@ -22,129 +22,131 @@ we have to use 04 modules (ec2, eip, sg and ebs) to create our ec2 instance, pub
 
 ##### Variables
 
-  #Used for tag all aws resources in this project
-  variable "author" {
-    type    = string
-    default = "frazer"
-  }
+    #Used for tag all aws resources in this project
+    variable "author" {
+      type    = string
+      default = "frazer"
+    }
 
-  #Used to customizise the instance type of our ec2
-  variable "instance_type" {
-    type    = string
-    default = "t2.nano"
-  }
+    #Used to customizise the instance type of our ec2
+    variable "instance_type" {
+      type    = string
+      default = "t2.nano"
+    }
 
-  #Used to specify which key pair will be use by our ec2 to enable the ssh connection
-  variable "ssh_key" {
-    type    = string
-    default = "devops-frazer"
-  }
+    #Used to specify which key pair will be use by our ec2 to enable the ssh connection
+    variable "ssh_key" {
+      type    = string
+      default = "devops-frazer"
+    }
 
-  #use to specify the availability zone we'll use
-  variable "az" {
-    type    = string
-    default = "us-east-1b"
-  }
+    #use to specify the availability zone we'll use
+    variable "az" {
+      type    = string
+      default = "us-east-1b"
+    }
 
-  #Used to retrieve the sg_name of our sg module's output which contains the name of the security group; this variabe permit use to make the link between our ec2 an his sg.  
-  variable "sg_name" {
-    type    = string
-    default = "NULL"
-  }
+    #Used to retrieve the sg_name of our sg module's output which contains the name of the security group; this variabe permit use to make the link between our ec2 an his sg.  
+    variable "sg_name" {
+      type    = string
+      default = "NULL"
+    }
 
-  #Used to retrieve the public_ip of our eip module's output which contains the PUBLIC IP we'll use to create the ec2_file_infos in ec2 module
-  variable "public_ip" {
-    type    = string
-    default = "NULL"
-  }
+    #Used to retrieve the public_ip of our eip module's output which contains the PUBLIC IP we'll use to create the ec2_file_infos in ec2 module
+    variable "public_ip" {
+      type    = string
+      default = "NULL"
+    }
 
-  #User name we'll use to etablish the remote connexion with our ec2 instance; we also use this variable as ansible_user for run the ansible_odoo role
-  variable "user" {
-    type    = string
-    default = "NULL"
-  }
+    #User name we'll use to etablish the remote connexion with our ec2 instance; we also use this variable as ansible_user for run the ansible_odoo role
+    variable "user" {
+      type    = string
+      default = "NULL"
+    }
 
-  #Used to do the privileges escalation when running our ansible_odoo roles
-  variable "sudo_pass" {
-    type    = string
-    default = "NULL"
-  }
+    #Used to do the privileges escalation when running our ansible_odoo roles
+    variable "sudo_pass" {
+      type    = string
+      default = "NULL"
+    }
 
-  #Used to specify the owner of or amazon image 
-  variable "ubuntu_account_number" {
-    default = "099720109477"
-  }
+    #Used to specify the owner of or amazon image 
+    variable "ubuntu_account_number" {
+      default = "099720109477"
+    }
    
 ##### Output file
   
-  #Variable to expose the id of our instance to other module
-  output "out_instance_id" {
-    value = aws_instance.frazer-ec2.id
-  }
+    #Variable to expose the id of our instance to other module
+    output "out_instance_id" {
+      value = aws_instance.frazer-ec2.id
+    }
 
-  #Variable to expose the az of our instance to other module
-  output "out_instance_az" {
-    value = aws_instance.frazer-ec2.availability_zone
-  }
+    #Variable to expose the az of our instance to other module
+    output "out_instance_az" {
+      value = aws_instance.frazer-ec2.availability_zone
+    }
 
 
 #### sg module variable
 
 ##### Variable
+
 this module just have the <author> variable to tag all its resources
 
 ##### Output file
 
-  #Expose the security group name to other modules
-  output "out_sg_name" {
-    value = aws_security_group.my_sg.name
-  }
+    #Expose the security group name to other modules
+    output "out_sg_name" {
+      value = aws_security_group.my_sg.name
+    }
 
 #### eip module variable
 
 ##### Variable
-Any variable 
+
+Any variable for this module
 
 ##### Output file
   
-  #Expose his public IP to other modules
-  output "out_eip_ip" {
-    value = aws_eip.my_eip.public_ip
-  }
+    #Expose his public IP to other modules
+    output "out_eip_ip" {
+      value = aws_eip.my_eip.public_ip
+    }
 
-  #Expose eip-id to tne other module (use to make association with ec2)
-  output "out_eip_id" {
-    value = aws_eip.my_eip.id
-  }
+    #Expose eip-id to tne other module (use to make association with ec2)
+    output "out_eip_id" {
+      value = aws_eip.my_eip.id
+    }
 
 #### ebs module variable
 
 ##### Variable
 
-  #Used for tag all our aws resources or objects
-  variable "author" {
-    type    = string
-    default = "frazer"
-  }
+    #Used for tag all our aws resources or objects
+    variable "author" {
+      type    = string
+      default = "frazer"
+    }
 
-  #Use to customize the size of ow new EBS
-  variable "dd_size" {
-    type    = number
-    default = 2
-  }
+    #Use to customize the size of ow new EBS
+    variable "dd_size" {
+      type    = number
+      default = 2
+    }
 
-  #use to specify the availability zone we'll use
-  variable "az" {
-    type    = string
-    default = "us-east-1b"
-  } 
+    #use to specify the availability zone we'll use
+    variable "az" {
+      type    = string
+      default = "us-east-1b"
+    } 
 
 ##### Output file
 
-  #Expose the Ebs_id to other modules (use to attach this vol to our ec2)
-  output "out_vol_id" {
-    value = aws_ebs_volume.my_vol.id
-  }
+    #Expose the Ebs_id to other modules (use to attach this vol to our ec2)
+    output "out_vol_id" {
+      value = aws_ebs_volume.my_vol.id
+    }
 
 ## Dependencies
 
@@ -152,59 +154,58 @@ Any variable
 
 ### Example of use
   
-  provider "aws" {
-    region                  = "us-east-1"
-    shared_credentials_file = "C:/Files/Docs Perso/DevOps/AWS/.aws/credentials"
+    provider "aws" {
+      region                  = "us-east-1"
+      shared_credentials_file = "C:/Files/Docs Perso/DevOps/AWS/.aws/credentials"
+    }
+
+    #Appel du module de création du sg
+    module "sg" {
+      source        = "../modules/sg"
+      author = "app"
+    }
+
+    #Appel module de création du volume
+    module "ebs" {
+      source        = "../modules/ebs"
+      dd_size = 5
+      author = "app"
+    }
+
+    #Appel du module de création de l'adresse ip pulique
+    module "eip" {
+      source        = "../modules/eip"
+    }
+
+    #Appel du module de création de ec2
+    module "ec2" {
+      source        = "../modules/ec2"
+      author        = "app"
+      instance_type = "t2.micro"
+      sg_name= "${module.sg.out_sg_name}"
+      public_ip = "${module.eip.out_eip_ip}"
+      user = "user_name"
+      sudo_pass = "password"
   }
 
+    #//////////////////////////////////////////////////
+    #Creation des associations nécessaires entre nos ressources
 
-  #Appel du module de création du sg
-  module "sg" {
-    source        = "../modules/sg"
-    author = "app"
-  }
+    resource "aws_eip_association" "eip_assoc" {
+      instance_id = module.ec2.out_instance_id
+      allocation_id = module.eip.out_eip_id
+    }
 
-  #Appel module de création du volume
-  module "ebs" {
-    source        = "../modules/ebs"
-    dd_size = 5
-    author = "app"
-  }
-
-  #Appel du module de création de l'adresse ip pulique
-  module "eip" {
-    source        = "../modules/eip"
-  }
-
-  #Appel du module de création de ec2
-  module "ec2" {
-    source        = "../modules/ec2"
-    author        = "app"
-    instance_type = "t2.micro"
-    sg_name= "${module.sg.out_sg_name}"
-    public_ip = "${module.eip.out_eip_ip}"
-    user = "ubuntu"
-    sudo_pass = "ubuntu"
-  }
-
-  #//////////////////////////////////////////////////
-  #Creation des associations nécessaires entre nos ressources
-
-  resource "aws_eip_association" "eip_assoc" {
-    instance_id = module.ec2.out_instance_id
-    allocation_id = module.eip.out_eip_id
-  }
-
-  resource "aws_volume_attachment" "ebs_att" {
-    device_name = "/dev/sdh"
-    volume_id   = module.ebs.out_vol_id
-    instance_id = module.ec2.out_instance_id
-  }
+    resource "aws_volume_attachment" "ebs_att" {
+      device_name = "/dev/sdh"
+      volume_id   = module.ebs.out_vol_id
+      instance_id = module.ec2.out_instance_id
+    }
  
 ### Ansible Role commands 
 This command is run in our remote-exec provisionner (make sure to be in the rigth ansible_odoo repositiry)
 
-    "ansible-playbook -i local_host.yml odoo.yml -e ansible_user=${var.user} -e ansible_sudo_pass=${var.sudo_pass}"
+     "ansible-playbook -i local_host.yml odoo.yml -e ansible_user=${var.user} -e ansible_sudo_pass=${var.sudo_pass}"
 
 
 ### Author Information
