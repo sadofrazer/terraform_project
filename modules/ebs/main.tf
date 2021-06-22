@@ -1,5 +1,5 @@
 resource "aws_ebs_volume" "my_vol" {
-  availability_zone = "us-east-1b"
+  availability_zone = "${var.az}"
   size              = var.dd_size
 
   tags = {

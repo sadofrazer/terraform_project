@@ -26,3 +26,13 @@ variable "public_ip" {
 variable "ubuntu_account_number" {
   default = "099720109477"
 }
+
+variable "az" {
+  type    = string
+  default = "us-east-1b"
+}
+
+variable "user" {
+  type    = string
+  default = "NULL"
+}

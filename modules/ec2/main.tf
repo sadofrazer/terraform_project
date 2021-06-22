@@ -12,7 +12,7 @@ resource "aws_instance" "frazer-ec2" {
   ami             = data.aws_ami.my_ubuntu_ami.id
   instance_type   = var.instance_type
   key_name        = var.ssh_key
-  availability_zone = "us-east-1b"
+  availability_zone = "${var.az}"
   security_groups = ["${var.sg_name}"]
   tags = {
     Name = "${var.author}-ec2"
@@ -35,7 +35,7 @@ resource "aws_instance" "frazer-ec2" {
     ] 
     connection {
       type        = "ssh"
-      user        = "ubuntu"
+      user        = "${var.user}"
       private_key = file("C:/Files/Docs Perso/DevOps/AWS/.aws/${var.ssh_key}.pem")
       host        = "${self.public_ip}"
     }
