@@ -65,6 +65,7 @@ Used to retrieve the public_ip of our eip module's output which contains the PUB
     }
 
 User name we'll use to etablish the remote connexion with our ec2 instance
+
     variable "user" {
       type    = string
       default = "NULL"
@@ -182,7 +183,7 @@ Expose the Ebs_id to other modules (use to attach this vol to our ec2)
       author = "app"
     }
 
-    #Appel du module de création de l'adresse ip pulique
+    #Appel du module de création de l'adresse ip publique
     module "eip" {
       source        = "../modules/eip"
     }
