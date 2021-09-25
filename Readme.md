@@ -2,7 +2,7 @@
 
 [![CI](icones/odoo_icon-100.png)](https://github.com/sadofrazer/ansible_odoo/tree/aws_terraform)
 
-The purposes of this project is to deploys an ec2 instances with a fixed public Ip, security groups and one additional EBS to store our personnal data. After deploying the AWS ec2 instance with its right others link objects, we use an ansible role from one repository to deploy a one odoo instance.
+The purposes of this project is to deploys an ec2 instances with a fixed public Ip, security groups and one additional EBS to store our personnal data. After deploying the AWS ec2 instance with its right others link objects, we use an ansible role from one repository to deploy a one odoo instance
 
 Find below a light description of this project source code.
 
