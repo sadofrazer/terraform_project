@@ -13,7 +13,7 @@ variable "instance_type" {
 #Used to specify which key pair will be use by our ec2 to enable the ssh connection
 variable "ssh_key" {
   type    = string
-  default = "devops-frazer"
+  default = "frazer-kp"
 }
 
 #use to specify the availability zone we'll use
