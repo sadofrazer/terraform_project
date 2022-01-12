@@ -23,7 +23,7 @@ resource "aws_instance" "frazer-ec2" {
   }
 
   provisioner "local-exec" {
-    command = " echo PUBLIC IP: ${var.public_ip} ; ID: ${aws_instance.frazer-ec2.id} ; AZ: ${aws_instance.frazer-ec2.availability_zone}; >> infos_ec2.txt"
+    command = " echo PUBLIC IP: ${var.public_ip} , ID: ${aws_instance.frazer-ec2.id} , AZ: ${aws_instance.frazer-ec2.availability_zone} >> infos_ec2.txt"
   }
 
   provisioner "remote-exec" {
